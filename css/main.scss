@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@200;300;400;500;600;700&display=swap');
+@import 'variables.scss';
+
+html{
+    font: 16px;
+}
+
+body{
+    background-color: $background-white;
+    font-family: $main-font;
+}
+
+.wrapper{
+    display: flex;
+
+    .side-nav{
+        width: 100px;
+        border-right: 2px solid $lighter-grey;
+
+        .logo{
+            margin-bottom: 2em;
+            padding: 2em 0;
+
+            img{
+                height: 4em;
+                margin: 0 auto;
+            }
+        }
+
+        .menu{
+            ul{
+                li{
+                    margin-bottom: 1.7em;
+                    display: block;
+                    position: relative;
+                }
+
+                img{
+                    height: 1.9em;
+                    margin: 0 auto;
+                    filter: grayscale(1);
+                }
+
+                .stroke{
+                    height: 1.9em;
+                    width: 3px;
+                    border-radius: 6px;
+                    background-color: $secondary-text;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    overflow: hidden;
+                    display: none;
+
+                    .half{
+                        display: block;
+                        height: 50%;
+                        width: inherit;
+                        background-color: $normal-green;
+                        position: inherit;
+                        bottom: 0;
+                    }
+                }
+            }
+            
+            & .active{
+                a{
+                    img{
+                        filter: grayscale(0);
+                    }
+
+                    .stroke{
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
