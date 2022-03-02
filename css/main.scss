@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@200;300;400;500;600;700&display=swap');
 @import 'variables.scss';
+@import 'mixins.scss';
 
 html{
     font: 16px;
@@ -33,47 +34,337 @@ body{
                     margin-bottom: 1.7em;
                     display: block;
                     position: relative;
-                }
 
-                img{
-                    height: 1.9em;
-                    margin: 0 auto;
-                    filter: grayscale(1);
-                }
-
-                .stroke{
-                    height: 1.9em;
-                    width: 3px;
-                    border-radius: 6px;
-                    background-color: $secondary-text;
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    overflow: hidden;
-                    display: none;
-
-                    .half{
-                        display: block;
-                        height: 50%;
-                        width: inherit;
-                        background-color: $normal-green;
-                        position: inherit;
-                        bottom: 0;
-                    }
-                }
-            }
-            
-            & .active{
-                a{
                     img{
-                        filter: grayscale(0);
+                        height: 1.9em;
+                        margin: 0 auto;
+                        filter: grayscale(1);
+                    }
+    
+                    .stroke{
+                        height: 1.9em;
+                        width: 3px;
+                        border-radius: 6px;
+                        background-color: $secondary-text;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        overflow: hidden;
+                        display: none;
+    
+                        .half{
+                            display: block;
+                            height: 50%;
+                            width: inherit;
+                            background-color: $normal-green;
+                            position: inherit;
+                            bottom: 0;
+                        }
                     }
 
-                    .stroke{
-                        display: block;
+                    &.active{
+                        a{
+                            img{
+                                filter: grayscale(0);
+                            }
+        
+                            .stroke{
+                                display: block;
+                            }
+                        }
+                    }
+
+                    &:hover{
+                        a{
+                            img{
+                                filter: grayscale(0);
+                            }
+                        }
+                        
+                    }
+                    
+                   
+
+                }         
+            }
+        }
+    }
+
+    .content{
+        width: 100%;
+
+        .main{
+            height: 100vh;
+            padding: 2.5em 3em 0 3em;
+            border-right: 2px solid $lighter-grey;
+
+            header{
+                .title{
+                    h1{
+                        @include setFont($main-font, 2.55em, 600);
+                        text-transform:capitalize;
+                        color: $secondary-text;
+                        line-height: 1.5em;
+                    }
+                   span{
+                    @include setFont($main-font, 1em, 500);
+                    color: $primary-text;
+                    margin-top: .4px;
+                    display: block;
+                   }
+                }
+                .search-bar{
+                    .grp{
+                        position: relative;
+                        img{
+                            height: 2.3em;
+                            display: inline-block;
+                            position: absolute;
+                            left: 18px;
+                            top: 50%;
+                            transform: translate(0, -50%);
+                        }
+                        input{
+                            display: block;
+                            padding: 14px 50px 14px 54px;
+                            outline:none;
+                            border-radius: 50px;
+                            width: 100%;
+                            background: linear-gradient(90deg, $search-start, $search-end);
+                        }
                     }
                 }
             }
+            .dashboard-area{
+                margin-top: 3em;
+
+                .productivity-listing{
+                    .pro-bar{
+                        background-color: $light-green;
+                        padding: .95em;
+                        color:$secondary-text;
+                        margin-top: 1.2em;
+                        @include setFlex(flex, space-between, center, row);
+                        box-sizing: border-box;
+                        border-radius: 1em;
+                        box-shadow: 0 6px 10px rgb(1 86 91 /5%);
+
+                        &:nth-child(2){
+                            @include setProbarChild($normal-green, $background-white, $light-green, scale(-1, 1), $light-green);
+                        }
+                        &:nth-child(3){
+                            @include setProbarChild($dark-blue, $background-white, $light-green, scale(-1, 1) rotate(180deg), $primary-text);
+                        }
+                    }
+                }
+
+                .percent-area{
+                    @include setFlex(flex, start, center, row);
+                    .date-tag{
+                        @include setFlex(flex, initial, center, column);
+                        background-color: $background-white;
+                        padding: .6em 1.25em;
+                        box-sizing: border-box;
+                        border-radius: .7em;
+                        margin-right: 2em;
+                        position: relative;
+                        box-shadow: 4px 6px 10px rgba(0, 0, 0, .1);
+
+                        .day, .date{
+                            display: block;
+                            position: relative;
+                            z-index: 99;
+                        }
+
+                        .day{
+                            text-transform: capitalize;
+                            font-size: .875em;
+                            font-weight: 500;
+                            color: $primary-text;
+                        }
+
+                        .date{
+                            font-size: 2em;
+                            font-weight: 600;
+                            color: $primary-text;
+                        }
+
+                        &::after{
+                            content: "";
+                            height: 44px;
+                            width: 43px;
+                            display: block;
+                            background-color: $background-white;
+                            position: absolute;
+                            top: 50%;
+                            right: -24%;
+                            border-radius: 4px;
+                            transform: translate(0, -50%) rotate(45deg) skew(24deg, 24deg);
+                        }
+                    }
+
+                    .fancy-chart{
+                        .chart-title{
+                            text-transform: capitalize;
+                            @include setFont($main-font, .875em, 600)
+                        }
+
+                        .chart{
+                            @include setFlex(flex, space-between, flex-start, row);
+                            position: relative;
+                            top: .7em;
+
+                            .svg{
+                                fill: $dark-blue;
+                                height: 1em;
+                                width: 5.6em;
+                            }
+
+                            .percent-count{
+                                display: block;
+                                position: relative;
+                                left: 1em;
+                                bottom: .5em;
+                                background-color: $background-white;
+                                padding: 3px 9px;
+                                box-sizing: border-box;
+                                border-radius: 20px;
+                                font-size: .85em;
+                                font-weight: 600;
+                                color: $secondary-text;
+                            }
+                        }
+                    }
+                }
+
+                .time-area{
+                    @include setFlex(flex, flex-start, flex-start, initial);
+                    width: 50%;
+                    position: relative;
+                    .grp{
+                        margin-left: 2em;
+                        .title{
+                            @include setFont($main-font, .875em, 600);
+                            display: block;
+                        }
+                        .time{
+                            @include setFont($main-font, 1.125em, 700);
+                            display: block;
+                        }
+                    }
+                    &::before{
+                        content: "";
+                        position: absolute;
+                        height: 50px;
+                        width: 1px;
+                        display: block;
+                        top: 50%;
+                        transform: translate(0, -50%);
+                        background-color: $normal-green;
+                    }
+                }
+
+                .h-title{
+                    @include setFont($main-font, 1.75em, 600);
+                    color: $secondary-text;
+                    text-align: center;
+
+                }
+                .monthly-statistics{
+                    .statistics-chart{
+                        height: 9.5em;
+                        width: 9.5em;
+                        margin: 0 auto;
+                        margin-top: 1.5em;
+                        margin-bottom: 1.65em;
+                        position: relative;
+                        @include setFlex(flex, center, center, initial);
+                        
+                        svg{
+                            fill: none;
+                            stroke-width: .1em;
+                            stroke-dasharray: 65px;
+                            stroke-linecap: round;
+                            position: absolute;
+                            @include setSVG($dark-blue, rotate(65deg), 99);
+
+                            &:nth-child(2){
+                                @include setSVG($normal-green, rotate(35deg), 98);
+                            }
+                            &:nth-child(3){
+                                @include setSVG($light-green, rotate(0deg), 97);
+                            }
+                            &:nth-child(4){
+                                @include setSVG($darker-grey, rotate(0deg), 96);
+                                stroke-dasharray: 100px;
+                            }
+                        }
+
+                        .decal-circle{
+                            height: 4.5em;
+                            width: 4.5em;
+                            display: inline-block;
+                            background-color: $light-green;
+                            border-radius: 50%;
+                            position: absolute;
+
+                        }
+                        .rocket{
+                            height: 4em;
+                            position: absolute;
+                            bottom: 4em;
+                        }
+                    }
+
+                    .statistics-progress{
+                        @include setFlex(flex, space-between,initial, column);
+                        height: 9.3em;
+                        .stats{
+                            .top-area{
+                                @include setFlex(flex, space-between,initial, initial);
+                                .stats-title{
+                                    color: $primary-text;
+                                    font-weight: 500;
+                                }
+                                .stats-percentage{
+                                    color: $secondary-text;
+                                    font-weight: 700;
+                                }
+                            }
+
+                            .stats-line{
+                                margin-bottom: .35em;
+                                .outer{
+                                    display: block;
+                                    width: 100%;
+                                    height: .4em;
+                                    border-radius: 15px;
+                                    background-color: $lighter-grey;
+                                    overflow: hidden;
+                                    .inner{
+                                        display: block;
+                                        width: 40%;
+                                        height: inherit;
+                                        border-radius: 15px;
+                                        background-color: $normal-green;
+                                        overflow: hidden;
+                                    }
+                                }
+                            }
+                            &:nth-child(2){
+                                @include setStatsChild(80%, $dark-blue);
+                            }
+                            &:nth-child(3){
+                                @include setStatsChild(35%, $light-green);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .profile-area{
+            height: 100vh;
         }
     }
 }

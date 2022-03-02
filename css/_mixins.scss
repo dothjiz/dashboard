@@ -1,0 +1,44 @@
+@mixin setFont($typeface, $fontSize, $fontWeight){
+    font-family: $typeface;
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+}
+
+@mixin setFlex($display, $justify, $align, $flex){
+    display: $display;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $flex;
+}
+
+@mixin setProbarChild($bgVal, $colorVal, $chartVal, $chartTransform, $timeBg) {
+    background-color: $bgVal;
+    color: $colorVal;
+    .chart{
+        svg{
+            fill:$chartVal;
+            transform: $chartTransform;
+        }
+    }
+
+    .time-area{
+        &::before{
+            background-color: $timeBg;
+        }
+    }
+}
+
+@mixin setSVG($stroke, $transform, $zindex) {
+    stroke: $stroke;
+    transform: $transform;
+    z-index: $zindex;
+}
+
+@mixin setStatsChild($width, $color) {
+    .outer{
+        .inner{
+            width: $width;
+            background-color: $color;
+        }
+    }
+}
